@@ -1,0 +1,28 @@
+
+item     weight      value
+  1        2           3
+  2        3           4
+  3        4           8
+  4        5           8
+  5        9          10
+def knapsack(n, value, weight, W):
+    """n number of items, where i items has a value, value[i] and 
+    weight, w[i] for a total weight of W"""
+    t = [[0 for col in range(W + 1)] for row in range(n+1)]
+    for j in range(W+1):
+        t[0][j] = 0
+
+    for i in range(1, n + 1):
+        for j in range(W + 1):
+            if w[i] > j:
+                t[i][j] = t[i-1][j]
+
+            else:
+                t[i][j] = max([t[i-1][j], t[i-1][j -w[i]] + v[i]])
+
+    return t[n][W]
+
+weight = [4, 8, 3, 5, 2]
+value =  [5, 10,3, 2, 3]
+
+print(knapsack(5,value, weight, 10))
